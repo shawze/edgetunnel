@@ -5811,10 +5811,9 @@ async function handleWebSocket(request) {
 async function 解析地址端口(proxyIP) {
     proxyIP = proxyIP.toLowerCase();
     if (proxyIP.includes('.william')) {
-        const williamResult = await (async function 解析William域名(域名) {
+        const williamResult = await (async function 解析William域名(william) {
             try {
-                const suffix = 域名.split('.william')[1] || '';
-                const response = await fetch(`https://1.1.1.1/dns-query?name=william${suffix}&type=TXT`, { headers: { 'Accept': 'application/dns-json' } });
+                const response = await fetch(`https://1.1.1.1/dns-query?name=${william}&type=TXT`, { headers: { 'Accept': 'application/dns-json' } });
                 if (!response.ok) return null;
                 const data = await response.json();
                 const txtRecords = (data.Answer || []).filter(record => record.type === 16).map(record => record.data);
